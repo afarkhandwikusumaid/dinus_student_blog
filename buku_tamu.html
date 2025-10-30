@@ -55,6 +55,12 @@
         background-color: white;
         border-radius: 8px;
         box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s ease;
+      }
+
+      .container:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
       }
 
       h2 {
@@ -83,6 +89,16 @@
         border: 1px solid #ddd;
         border-radius: 4px;
         font-size: 16px;
+        transition: border-color 0.3s, box-shadow 0.3s;
+      }
+
+      input[type="text"]:focus,
+      input[type="email"]:focus,
+      textarea:focus,
+      select:focus {
+        outline: none;
+        border-color: #3498db;
+        box-shadow: 0 0 5px rgba(52, 152, 219, 0.3);
       }
 
       textarea {
@@ -109,14 +125,15 @@
       }
 
       input[type="submit"],
-      input[type="reset"] {
+      input[type="reset"],
+      button {
         padding: 10px 20px;
         border: none;
         border-radius: 4px;
         cursor: pointer;
         font-size: 16px;
         margin: 0 10px;
-        transition: background-color 0.3s;
+        transition: all 0.3s;
       }
 
       input[type="submit"] {
@@ -126,6 +143,7 @@
 
       input[type="submit"]:hover {
         background-color: #27ae60;
+        transform: translateY(-2px);
       }
 
       input[type="reset"] {
@@ -135,6 +153,7 @@
 
       input[type="reset"]:hover {
         background-color: #c0392b;
+        transform: translateY(-2px);
       }
 
       /* Footer Styles */
@@ -154,25 +173,306 @@
       footer a:hover {
         text-decoration: underline;
       }
+
+      /* Modal Styles */
+      .modal {
+        display: none;
+        position: fixed;
+        z-index: 1000;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.8);
+        justify-content: center;
+        align-items: center;
+      }
+
+      .modal-content {
+        background-color: white;
+        padding: 30px;
+        border-radius: 8px;
+        max-width: 500px;
+        width: 90%;
+        text-align: center;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+      }
+
+      .close {
+        position: absolute;
+        top: 20px;
+        right: 30px;
+        color: white;
+        font-size: 40px;
+        font-weight: bold;
+        cursor: pointer;
+        transition: color 0.3s;
+      }
+
+      .close:hover {
+        color: #3498db;
+      }
+
+      /* Theme Toggle */
+      .theme-toggle {
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        background: #749bc2;
+        border: none;
+        border-radius: 50%;
+        width: 40px;
+        height: 40px;
+        cursor: pointer;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+        z-index: 100;
+        transition: transform 0.3s;
+      }
+
+      .theme-toggle:hover {
+        transform: rotate(30deg);
+      }
+
+      .theme-toggle i {
+        color: white;
+        font-size: 20px;
+      }
+
+      /* Dark Mode Styles */
+      body.dark-mode {
+        background-color: #1a1a2e;
+        color: #e6e6e6;
+      }
+
+      body.dark-mode nav {
+        background-color: #16213e;
+      }
+
+      body.dark-mode .container {
+        background-color: #2c3e50;
+        color: #e6e6e6;
+      }
+
+      body.dark-mode input[type="text"],
+      body.dark-mode input[type="email"],
+      body.dark-mode textarea,
+      body.dark-mode select {
+        background-color: #34495e;
+        color: #e6e6e6;
+        border-color: #4a6572;
+      }
+
+      body.dark-mode footer {
+        background-color: #0f1419;
+      }
+
+      body.dark-mode .modal-content {
+        background-color: #2c3e50;
+        color: #e6e6e6;
+      }
+
+      /* Loading Animation */
+      .loading {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(255, 255, 255, 0.8);
+        z-index: 9999;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+      }
+
+      .loading.dark-mode {
+        background-color: rgba(0, 0, 0, 0.8);
+      }
+
+      .spinner {
+        width: 50px;
+        height: 50px;
+        border: 5px solid #f3f3f3;
+        border-top: 5px solid #3498db;
+        border-radius: 50%;
+        animation: spin 1s linear infinite;
+        margin-bottom: 15px;
+      }
+
+      @keyframes spin {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+      }
+
+      /* Notification */
+      .notification {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        padding: 15px 25px;
+        background-color: #2ecc71;
+        color: white;
+        border-radius: 5px;
+        box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+        transform: translateY(100px);
+        opacity: 0;
+        transition: transform 0.3s, opacity 0.3s;
+        z-index: 1000;
+      }
+
+      .notification.show {
+        transform: translateY(0);
+        opacity: 1;
+      }
+
+      .notification.error {
+        background-color: #e74c3c;
+      }
+
+      /* Guest List Styles */
+      .guest-list {
+        margin-top: 30px;
+        padding: 20px;
+        background-color: white;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      }
+
+      body.dark-mode .guest-list {
+        background-color: #2c3e50;
+      }
+
+      .guest-item {
+        padding: 15px;
+        border-bottom: 1px solid #eee;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      body.dark-mode .guest-item {
+        border-bottom-color: #4a6572;
+      }
+
+      .guest-item:last-child {
+        border-bottom: none;
+      }
+
+      .guest-info h4 {
+        margin-bottom: 5px;
+        color: #2c3e50;
+      }
+
+      body.dark-mode .guest-info h4 {
+        color: #e6e6e6;
+      }
+
+      .guest-info p {
+        color: #666;
+        font-size: 14px;
+      }
+
+      body.dark-mode .guest-info p {
+        color: #b8b8b8;
+      }
+
+      .delete-btn {
+        background-color: #e74c3c;
+        color: white;
+        border: none;
+        padding: 5px 10px;
+        border-radius: 4px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+      }
+
+      .delete-btn:hover {
+        background-color: #c0392b;
+      }
+
+      /* Character Counter */
+      .char-counter {
+        text-align: right;
+        font-size: 12px;
+        color: #666;
+        margin-top: 5px;
+      }
+
+      body.dark-mode .char-counter {
+        color: #b8b8b8;
+      }
+
+      .char-counter.warning {
+        color: #e67e22;
+      }
+
+      .char-counter.error {
+        color: #e74c3c;
+      }
+
+      /* Form Validation Styles */
+      .error-message {
+        color: #e74c3c;
+        font-size: 12px;
+        margin-top: 5px;
+        display: none;
+      }
+
+      input.error, textarea.error, select.error {
+        border-color: #e74c3c;
+        box-shadow: 0 0 5px rgba(231, 76, 60, 0.3);
+      }
+
+      input.valid, textarea.valid, select.valid {
+        border-color: #2ecc71;
+        box-shadow: 0 0 5px rgba(46, 204, 113, 0.3);
+      }
     </style>
   </head>
   <body>
-    
-      <!-- Start Navbar -->
-      <nav>
-        <h1>Dinus Student Blog</h1>
-        <a href="beranda.html">Beranda</a>
-        <a href="profil.html">Profil</a>
-        <a href="artikel.html">Artikel</a>
-        <a href="buku_tamu.html">Buku Tamu</a>
-        <hr />
-      </nav>
-      <!-- End Navbar -->
-    </a>
+    <!-- Theme Toggle Button -->
+    <button class="theme-toggle" id="themeToggle">
+      <i>🌙</i>
+    </button>
+
+    <!-- Loading Animation -->
+    <div class="loading" id="loading">
+      <div class="spinner"></div>
+      <p>Memproses...</p>
+    </div>
+
+    <!-- Notification -->
+    <div class="notification" id="notification"></div>
+
+    <!-- Success Modal -->
+    <div class="modal" id="successModal">
+      <span class="close" id="closeModal">&times;</span>
+      <div class="modal-content">
+        <h3>✅ Pesan Terkirim!</h3>
+        <p>Terima kasih telah mengisi buku tamu. Pesan Anda berhasil dikirim.</p>
+        <button id="modalOkBtn" style="margin-top: 20px; background: #3498db; color: white; padding: 10px 20px; border: none; border-radius: 4px; cursor: pointer;">OK</button>
+      </div>
+    </div>
+      
+    <!-- Start Navbar -->
+    <nav>
+      <h1>Dinus Student Blog</h1>
+      <a href="beranda.html">Beranda</a>
+      <a href="profil.html">Profil</a>
+      <a href="artikel.html">Artikel</a>
+      <a href="buku_tamu.html">Buku Tamu</a>
+      <hr />
+    </nav>
+    <!-- End Navbar -->
+
     <!-- Main Content-->
     <div class="container">
       <h2>Form Buku Tamu</h2>
-      <form>
+      <form id="guestForm">
         <div class="form-group">
           <label for="nama_lengkap">Nama Lengkap:</label>
           <input
@@ -181,57 +481,495 @@
             name="nama_lengkap"
             placeholder="Masukkan nama lengkap"
           />
+          <div class="error-message" id="namaError">Nama lengkap harus diisi (minimal 3 karakter)</div>
+          
           <br /><br />
           <label for="jenis_kelamin">Jenis Kelamin:</label>
-          Laki-laki
-          <input type="radio" name="jenis_kelamin" valur="L" /> Perempuan
-          <input type="radio" name="jenis_kelamin" value="P" /> <br /><br />
+          <div class="radio-group">
+            <label>
+              <input type="radio" name="jenis_kelamin" value="L" /> Laki-laki
+            </label>
+            <label>
+              <input type="radio" name="jenis_kelamin" value="P" /> Perempuan
+            </label>
+          </div>
+          <div class="error-message" id="genderError">Pilih jenis kelamin</div>
+          
+          <br />
           <label for="alamat_tinggal">Alamat Tinggal:</label>
           <input
             type="text"
+            id="alamat_tinggal"
             name="alamat_tinggal"
             placeholder="Masukkan alamat tinggal"
           />
+          <div class="error-message" id="alamatError">Alamat harus diisi</div>
+          
           <br /><br />
           <label for="email">Email:</label>
           <input
-            type="text"
-            for="email"
+            type="email"
+            id="email"
             name="email"
             placeholder="Masukkan email"
           />
+          <div class="error-message" id="emailError">Email harus valid</div>
+          
           <br /><br />
-          <label>Aktif pada sosial media :</label>
-          <input type="checkbox" name="facebook" value="Ya" /> Facebook
-          <input type="checkbox" name="facebook" value="Ya" /> X
-          <input type="checkbox" name="facebook" value="Ya" /> Instagram
-          <br /><br />
-          <label>Mengetahui ini dari:</label>
-          <select name="info">
-            <option selected="select">-=Pilih=-</option>
+          <label>Aktif pada sosial media:</label>
+          <div class="checkbox-group">
+            <label>
+              <input type="checkbox" name="sosial_media" value="Facebook" /> Facebook
+            </label>
+            <label>
+              <input type="checkbox" name="sosial_media" value="X" /> X
+            </label>
+            <label>
+              <input type="checkbox" name="sosial_media" value="Instagram" /> Instagram
+            </label>
+          </div>
+          
+          <br />
+          <label for="info">Mengetahui ini dari:</label>
+          <select id="info" name="info">
+            <option value="">-=Pilih=-</option>
             <option value="web udinus">Web Udinus</option>
             <option value="sosial media">Sosial Media</option>
             <option value="teman kerabat">Teman/Kerabat</option>
             <option value="browsing internet">Browsing Internet</option>
           </select>
+          <div class="error-message" id="infoError">Pilih sumber informasi</div>
+          
           <br /><br />
           <label for="pesan">Pesan:</label>
           <textarea
             id="pesan"
             name="pesan"
-            placeholder="Masukkan pesan"
+            placeholder="Masukkan pesan (maksimal 500 karakter)"
+            maxlength="500"
           ></textarea>
+          <div class="char-counter" id="charCounter">0/500 karakter</div>
+          <div class="error-message" id="pesanError">Pesan harus diisi (minimal 10 karakter)</div>
+          
           <br />
           <div class="button-group">
-            <input type="submit" value="Kirim" />
-            <input type="reset" value="Batal" />
+            <input type="submit" value="Kirim" id="submitBtn" />
+            <input type="reset" value="Batal" id="resetBtn" />
+            <button type="button" id="viewGuestsBtn" style="background: #3498db; color: white;">Lihat Tamu</button>
           </div>
         </div>
       </form>
+
+      <!-- Guest List Section -->
+      <div class="guest-list" id="guestList" style="display: none;">
+        <h3>Daftar Tamu</h3>
+        <div id="guestsContainer"></div>
+        <div class="button-group">
+          <button id="backToFormBtn" style="background: #95a5a6; color: white;">Kembali ke Form</button>
+          <button id="clearAllBtn" style="background: #e74c3c; color: white;">Hapus Semua</button>
+        </div>
+      </div>
     </div>
 
     <!-- Start Footer -->
-    <p align="center"><b>Copyright @2025 A.Farkhan Dwi Kusuma</b></p>
+    <footer>
+      <p><b>Copyright @2025 A.Farkhan Dwi Kusuma</b></p>
+    </footer>
     <!-- End Footer-->
+
+    <script>
+      // DOM Elements
+      const themeToggle = document.getElementById('themeToggle');
+      const loading = document.getElementById('loading');
+      const notification = document.getElementById('notification');
+      const guestForm = document.getElementById('guestForm');
+      const successModal = document.getElementById('successModal');
+      const closeModal = document.getElementById('closeModal');
+      const modalOkBtn = document.getElementById('modalOkBtn');
+      const viewGuestsBtn = document.getElementById('viewGuestsBtn');
+      const guestList = document.getElementById('guestList');
+      const backToFormBtn = document.getElementById('backToFormBtn');
+      const clearAllBtn = document.getElementById('clearAllBtn');
+      const guestsContainer = document.getElementById('guestsContainer');
+      const charCounter = document.getElementById('charCounter');
+      const pesanTextarea = document.getElementById('pesan');
+
+      // Form validation elements
+      const namaInput = document.getElementById('nama_lengkap');
+      const genderInputs = document.querySelectorAll('input[name="jenis_kelamin"]');
+      const alamatInput = document.getElementById('alamat_tinggal');
+      const emailInput = document.getElementById('email');
+      const infoSelect = document.getElementById('info');
+      const pesanInput = document.getElementById('pesan');
+
+      // Error message elements
+      const namaError = document.getElementById('namaError');
+      const genderError = document.getElementById('genderError');
+      const alamatError = document.getElementById('alamatError');
+      const emailError = document.getElementById('emailError');
+      const infoError = document.getElementById('infoError');
+      const pesanError = document.getElementById('pesanError');
+
+      // Theme Toggle Functionality
+      themeToggle.addEventListener('click', function() {
+        document.body.classList.toggle('dark-mode');
+        loading.classList.toggle('dark-mode');
+        
+        const icon = themeToggle.querySelector('i');
+        if (document.body.classList.contains('dark-mode')) {
+          icon.textContent = '☀️';
+          localStorage.setItem('theme', 'dark');
+        } else {
+          icon.textContent = '🌙';
+          localStorage.setItem('theme', 'light');
+        }
+        
+        showNotification('Tema berhasil diubah!');
+      });
+
+      // Check for saved theme preference
+      const savedTheme = localStorage.getItem('theme');
+      if (savedTheme === 'dark') {
+        document.body.classList.add('dark-mode');
+        loading.classList.add('dark-mode');
+        themeToggle.querySelector('i').textContent = '☀️';
+      }
+
+      // Character Counter for Message
+      pesanTextarea.addEventListener('input', function() {
+        const length = this.value.length;
+        charCounter.textContent = `${length}/500 karakter`;
+        
+        if (length > 450) {
+          charCounter.classList.add('warning');
+          charCounter.classList.remove('error');
+        } else if (length > 490) {
+          charCounter.classList.add('error');
+          charCounter.classList.remove('warning');
+        } else {
+          charCounter.classList.remove('warning', 'error');
+        }
+      });
+
+      // Form Validation Functions
+      function validateNama() {
+        const value = namaInput.value.trim();
+        if (value.length < 3) {
+          namaInput.classList.add('error');
+          namaInput.classList.remove('valid');
+          namaError.style.display = 'block';
+          return false;
+        } else {
+          namaInput.classList.add('valid');
+          namaInput.classList.remove('error');
+          namaError.style.display = 'none';
+          return true;
+        }
+      }
+
+      function validateGender() {
+        const checked = Array.from(genderInputs).some(input => input.checked);
+        if (!checked) {
+          genderError.style.display = 'block';
+          return false;
+        } else {
+          genderError.style.display = 'none';
+          return true;
+        }
+      }
+
+      function validateAlamat() {
+        const value = alamatInput.value.trim();
+        if (value.length === 0) {
+          alamatInput.classList.add('error');
+          alamatInput.classList.remove('valid');
+          alamatError.style.display = 'block';
+          return false;
+        } else {
+          alamatInput.classList.add('valid');
+          alamatInput.classList.remove('error');
+          alamatError.style.display = 'none';
+          return true;
+        }
+      }
+
+      function validateEmail() {
+        const value = emailInput.value.trim();
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(value)) {
+          emailInput.classList.add('error');
+          emailInput.classList.remove('valid');
+          emailError.style.display = 'block';
+          return false;
+        } else {
+          emailInput.classList.add('valid');
+          emailInput.classList.remove('error');
+          emailError.style.display = 'none';
+          return true;
+        }
+      }
+
+      function validateInfo() {
+        const value = infoSelect.value;
+        if (value === '') {
+          infoSelect.classList.add('error');
+          infoSelect.classList.remove('valid');
+          infoError.style.display = 'block';
+          return false;
+        } else {
+          infoSelect.classList.add('valid');
+          infoSelect.classList.remove('error');
+          infoError.style.display = 'none';
+          return true;
+        }
+      }
+
+      function validatePesan() {
+        const value = pesanInput.value.trim();
+        if (value.length < 10) {
+          pesanInput.classList.add('error');
+          pesanInput.classList.remove('valid');
+          pesanError.style.display = 'block';
+          return false;
+        } else {
+          pesanInput.classList.add('valid');
+          pesanInput.classList.remove('error');
+          pesanError.style.display = 'none';
+          return true;
+        }
+      }
+
+      // Real-time validation
+      namaInput.addEventListener('blur', validateNama);
+      alamatInput.addEventListener('blur', validateAlamat);
+      emailInput.addEventListener('blur', validateEmail);
+      infoSelect.addEventListener('change', validateInfo);
+      pesanInput.addEventListener('blur', validatePesan);
+      
+      genderInputs.forEach(input => {
+        input.addEventListener('change', validateGender);
+      });
+
+      // Form Submission
+      guestForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        // Validate all fields
+        const isNamaValid = validateNama();
+        const isGenderValid = validateGender();
+        const isAlamatValid = validateAlamat();
+        const isEmailValid = validateEmail();
+        const isInfoValid = validateInfo();
+        const isPesanValid = validatePesan();
+        
+        if (isNamaValid && isGenderValid && isAlamatValid && isEmailValid && isInfoValid && isPesanValid) {
+          showLoading();
+          
+          // Simulate form submission
+          setTimeout(() => {
+            hideLoading();
+            
+            // Save guest data
+            saveGuestData();
+            
+            // Show success modal
+            successModal.style.display = 'flex';
+            
+            // Reset form
+            guestForm.reset();
+            charCounter.textContent = '0/500 karakter';
+            charCounter.classList.remove('warning', 'error');
+            
+            // Remove validation classes
+            document.querySelectorAll('input, textarea, select').forEach(el => {
+              el.classList.remove('valid', 'error');
+            });
+          }, 1500);
+        } else {
+          showNotification('Harap perbaiki kesalahan pada form!', 'error');
+        }
+      });
+
+      // Save guest data to localStorage
+      function saveGuestData() {
+        const guestData = {
+          nama: namaInput.value.trim(),
+          gender: document.querySelector('input[name="jenis_kelamin"]:checked').value,
+          alamat: alamatInput.value.trim(),
+          email: emailInput.value.trim(),
+          sosialMedia: Array.from(document.querySelectorAll('input[name="sosial_media"]:checked'))
+            .map(input => input.value),
+          info: infoSelect.value,
+          pesan: pesanInput.value.trim(),
+          timestamp: new Date().toLocaleString('id-ID')
+        };
+        
+        let guests = JSON.parse(localStorage.getItem('guests')) || [];
+        guests.unshift(guestData); // Add to beginning of array
+        localStorage.setItem('guests', JSON.stringify(guests));
+      }
+
+      // Load and display guest data
+      function loadGuests() {
+        const guests = JSON.parse(localStorage.getItem('guests')) || [];
+        guestsContainer.innerHTML = '';
+        
+        if (guests.length === 0) {
+          guestsContainer.innerHTML = '<p style="text-align: center; padding: 20px;">Belum ada data tamu.</p>';
+          return;
+        }
+        
+        guests.forEach((guest, index) => {
+          const guestItem = document.createElement('div');
+          guestItem.className = 'guest-item';
+          guestItem.innerHTML = `
+            <div class="guest-info">
+              <h4>${guest.nama} (${guest.gender === 'L' ? 'Laki-laki' : 'Perempuan'})</h4>
+              <p><strong>Email:</strong> ${guest.email}</p>
+              <p><strong>Alamat:</strong> ${guest.alamat}</p>
+              <p><strong>Sosial Media:</strong> ${guest.sosialMedia.join(', ') || 'Tidak ada'}</p>
+              <p><strong>Mengetahui dari:</strong> ${guest.info}</p>
+              <p><strong>Pesan:</strong> ${guest.pesan}</p>
+              <p><small><strong>Waktu:</strong> ${guest.timestamp}</small></p>
+            </div>
+            <button class="delete-btn" data-index="${index}">Hapus</button>
+          `;
+          guestsContainer.appendChild(guestItem);
+        });
+        
+        // Add event listeners to delete buttons
+        document.querySelectorAll('.delete-btn').forEach(btn => {
+          btn.addEventListener('click', function() {
+            const index = parseInt(this.getAttribute('data-index'));
+            deleteGuest(index);
+          });
+        });
+      }
+
+      // Delete guest
+      function deleteGuest(index) {
+        let guests = JSON.parse(localStorage.getItem('guests')) || [];
+        guests.splice(index, 1);
+        localStorage.setItem('guests', JSON.stringify(guests));
+        loadGuests();
+        showNotification('Data tamu berhasil dihapus!');
+      }
+
+      // Clear all guests
+      clearAllBtn.addEventListener('click', function() {
+        if (confirm('Apakah Anda yakin ingin menghapus semua data tamu?')) {
+          localStorage.removeItem('guests');
+          loadGuests();
+          showNotification('Semua data tamu berhasil dihapus!');
+        }
+      });
+
+      // View Guests functionality
+      viewGuestsBtn.addEventListener('click', function() {
+        guestForm.style.display = 'none';
+        guestList.style.display = 'block';
+        loadGuests();
+      });
+
+      backToFormBtn.addEventListener('click', function() {
+        guestList.style.display = 'none';
+        guestForm.style.display = 'block';
+      });
+
+      // Modal functionality
+      closeModal.addEventListener('click', function() {
+        successModal.style.display = 'none';
+      });
+
+      modalOkBtn.addEventListener('click', function() {
+        successModal.style.display = 'none';
+      });
+
+      // Close modal when clicking outside
+      successModal.addEventListener('click', function(e) {
+        if (e.target === successModal) {
+          successModal.style.display = 'none';
+        }
+      });
+
+      // Form reset
+      document.getElementById('resetBtn').addEventListener('click', function() {
+        // Clear validation states
+        document.querySelectorAll('.error-message').forEach(el => {
+          el.style.display = 'none';
+        });
+        document.querySelectorAll('input, textarea, select').forEach(el => {
+          el.classList.remove('valid', 'error');
+        });
+        charCounter.textContent = '0/500 karakter';
+        charCounter.classList.remove('warning', 'error');
+      });
+
+      // Notification Function
+      function showNotification(message, type = 'success') {
+        notification.textContent = message;
+        notification.className = 'notification';
+        notification.classList.add('show');
+        if (type === 'error') {
+          notification.classList.add('error');
+        }
+        
+        setTimeout(() => {
+          notification.classList.remove('show');
+        }, 3000);
+      }
+
+      // Loading Functions
+      function showLoading() {
+        loading.style.display = 'flex';
+      }
+
+      function hideLoading() {
+        loading.style.display = 'none';
+      }
+
+      // Keyboard shortcuts
+      document.addEventListener('keydown', function(e) {
+        // T key toggles theme
+        if (e.key === 't' || e.key === 'T') {
+          themeToggle.click();
+        }
+        
+        // Escape key closes modal
+        if (e.key === 'Escape' && successModal.style.display === 'flex') {
+          successModal.style.display = 'none';
+        }
+        
+        // V key views guests
+        if ((e.key === 'v' || e.key === 'V') && guestForm.style.display !== 'none') {
+          viewGuestsBtn.click();
+        }
+        
+        // B key goes back to form
+        if ((e.key === 'b' || e.key === 'B') && guestList.style.display !== 'none') {
+          backToFormBtn.click();
+        }
+      });
+
+      // Initialize page
+      document.addEventListener('DOMContentLoaded', function() {
+        // Add some sample data if empty (for demo)
+        if (!localStorage.getItem('guests') && window.location.href.includes('buku_tamu')) {
+          const sampleGuests = [
+            {
+              nama: "Budi Santoso",
+              gender: "L",
+              alamat: "Jl. Merdeka No. 123, Semarang",
+              email: "budi@example.com",
+              sosialMedia: ["Facebook", "Instagram"],
+              info: "web udinus",
+              pesan: "Website yang sangat informatif dan bermanfaat!",
+              timestamp: new Date().toLocaleString('id-ID')
+            }
+          ];
+          localStorage.setItem('guests', JSON.stringify(sampleGuests));
+        }
+      });
+    </script>
   </body>
 </html>
